@@ -4949,6 +4949,7 @@ int dsi_panel_send_roi_dcs(struct dsi_panel *panel, int ctrl_idx,
 	return rc;
 }
 
+<<<<<<< HEAD
 int dsi_panel_pre_mode_switch_to_video(struct dsi_panel *panel)
 {
 	int rc = 0;
@@ -4985,6 +4986,9 @@ int dsi_panel_pre_mode_switch_to_cmd(struct dsi_panel *panel)
 	mutex_unlock(&panel->panel_lock);
 	return rc;
 }
+=======
+int skip_reinit = false;
+>>>>>>> c5b24716d193... drm: msm: Force skip reinit rsc client if DC is on
 static int panel_disp_param_send_lock(struct dsi_panel *panel, int param)
 {
 	int rc = 0;
@@ -5169,6 +5173,14 @@ static int panel_disp_param_send_lock(struct dsi_panel *panel, int param)
 	case DISPPARAM_HBM_FOD2NORM:
 		pr_info("hbm fod to normal mode\n");
 		rc = dsi_panel_tx_cmd_set(panel, DSI_CMD_SET_DISP_HBM_FOD2NORM);
+		break;
+	case 0x40000:
+		pr_info("DC on\n");
+		skip_reinit = true;
+		break;
+	case 0x50000:
+		pr_info("DC off\n");
+		skip_reinit = false;
 		break;
 	case DISPPARAM_HBM_FOD_OFF:
 		pr_info("hbm fod off\n");
