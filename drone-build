@@ -8,6 +8,7 @@ firstver="MarisaKernel"
 device1="cepheus"
 device2="raphael"
 middlever="1.1-r2"
+source=`pwd`
 
 args="-j$(nproc --all) O=out \
 	ARCH=arm64 \
