@@ -7,7 +7,7 @@ date="`date +"%m%d%H%M"`"
 firstver="MarisaKernel"
 device1="cepheus"
 device2="raphael"
-middlever="1.0.2"
+middlever="1.1-r1"
 
 args="-j$(nproc --all) O=out \
 	ARCH=arm64 \
@@ -18,6 +18,8 @@ args+="CC=$clang_path \
 	CROSS_COMPILE=$gcc_path "
 
 args+="CROSS_COMPILE_ARM32=$gcc_32_path "
+
+args+="LOCALVERSION=-${firstver}-${middlever} "
 
 clean(){
 	make mrproper
@@ -45,23 +47,21 @@ terminate(){
 buildCepheus(){
 	export KBUILD_BUILD_USER="Cepheus"
 	export KBUILD_BUILD_HOST="MarisaKernel"
-args+="LOCALVERSION=-${firstver}-${device1}-${middlever} "
   clean
 	make $args cepheus_defconfig&&make $args
-	if [ !$? -ne 0 ]; then
+	if [ $? -ne 0 ]; then
     terminate "Error while building for cepheus!"
     fi
 	mkzip_cepheus
-	tg_notify "Finish building cepheus!"
+	log "Finish building cepheus!"
 }
 
 buildRaphael(){
 	export KBUILD_BUILD_USER="Raphael"
 	export KBUILD_BUILD_HOST="MarisaKernel"
-args+="LOCALVERSION=-${firstver}-${device2}-${middlever} "
   clean
 	make $args raphael_defconfig&&make $args
-	if [ !$? -ne 0 ]; then
+	if [ $? -ne 0 ]; then
     terminate "Error while building for raphael!"
     fi
 	mkzip_raphael
@@ -90,7 +90,10 @@ mkzip_raphael(){
 	cd $source
 }
 
+
 tg_notify "LOG: START BUILDING!"
+git submodule init
+git submodule update
 buildCepheus
 buildRaphael
 log "Build finished for #${DRONE_BUILD_NUMBER} ( ${date} )."
