@@ -48,7 +48,7 @@ buildCepheus(){
 args+="LOCALVERSION=-${firstver}-${device1}-${middlever} "
   clean
 	make $args cepheus_defconfig&&make $args
-	if [ !$? -ne 0 ]; then
+	if [ $? -ne 0 ]; then
     terminate "Error while building for cepheus!"
     fi
 	mkzip_cepheus
@@ -61,7 +61,7 @@ buildRaphael(){
 args+="LOCALVERSION=-${firstver}-${device2}-${middlever} "
   clean
 	make $args raphael_defconfig&&make $args
-	if [ !$? -ne 0 ]; then
+	if [ $? -ne 0 ]; then
     terminate "Error while building for raphael!"
     fi
 	mkzip_raphael
