@@ -4944,7 +4944,6 @@ int dsi_panel_send_roi_dcs(struct dsi_panel *panel, int ctrl_idx,
 	return rc;
 }
 
-<<<<<<< HEAD
 int dsi_panel_pre_mode_switch_to_video(struct dsi_panel *panel)
 {
 	int rc = 0;
@@ -4981,9 +4980,7 @@ int dsi_panel_pre_mode_switch_to_cmd(struct dsi_panel *panel)
 	mutex_unlock(&panel->panel_lock);
 	return rc;
 }
-=======
 int skip_reinit = false;
->>>>>>> c5b24716d193... drm: msm: Force skip reinit rsc client if DC is on
 static int panel_disp_param_send_lock(struct dsi_panel *panel, int param)
 {
 	int rc = 0;
