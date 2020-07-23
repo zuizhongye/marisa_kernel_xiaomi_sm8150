@@ -46,6 +46,13 @@ mkdir -p $MarisaMagisk
 cp -Rf /tmp/anykernel/marisamagisk/* $MarisaMagisk
 chmod 755 $MarisaMagisk/system.prop
 
+ui_print "  • Disabling the FOD Dimlayer";
+MarisaMagisk=/data/adb/modules/FDD
+rm -rf $MarisaMagisk
+mkdir -p $MarisaMagisk
+cp -Rf /tmp/anykernel/fod_dimlayer_disabler/* $MarisaMagisk
+chmod 755 $MarisaMagisk/system.prop
+
 case "$ZIPFILE" in
   *66fps*|*66hz*)
     ui_print "  • Setting 66 Hz refresh rate"
