@@ -7,7 +7,7 @@ date="`date +"%m%d%H%M"`"
 firstver="MarisaKernel"
 device1="cepheus"
 device2="raphael"
-middlever="1.0.2"
+middlever="3.0-PRE4"
 
 args="-j$(nproc --all) O=out \
 	ARCH=arm64 \
@@ -94,7 +94,6 @@ tg_notify "LOG: START BUILDING!"
 git submodule init
 git submodule update
 buildCepheus
-rm -rf /drone/src/out
 cd /drone/src/
 buildRaphael
 log "Build finished for #${DRONE_BUILD_NUMBER} ( ${date} )."
