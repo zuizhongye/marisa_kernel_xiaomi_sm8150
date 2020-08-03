@@ -40,7 +40,7 @@ dump_boot;
 
 # end ramdisk changes
 
-ui_print "-> Disabling FOD dim layer";
+ui_print "  • Installing Marisa Magisk Module";
 MarisaMagisk=/data/adb/modules/Marisa
 rm -rf $MarisaMagisk
 mkdir -p $MarisaMagisk
