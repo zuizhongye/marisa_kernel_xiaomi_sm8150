@@ -7,7 +7,7 @@ date="`date +"%m%d%H%M"`"
 firstver="MarisaKernel"
 device1="cepheus"
 device2="raphael"
-middlever="3.0-r4-BETA"
+middlever="3.0-r5"
 
 args="-j$(nproc --all) O=out \
 	ARCH=arm64 \
